@@ -2,10 +2,74 @@
 //
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	while (true) {
+		try {
+			double Num1, Num2;
+			int Operator;
+			double Result;
+			cout << "Enter method: 1. +, 2. -, 3. *, 4. /, 5. squre, 6. square root, 7. quit\n";
+			cin >> Operator;
+			if (Operator < 5 && Operator >= 1) {
+				cout << "Enter first number: \n";
+				cin >> Num1;
+				cout << "Enter second number: \n";
+				cin >> Num2;
+				switch (Operator)
+				{
+				case 1:
+					Result = Num1 + Num2;
+					break;
+				case 2:
+					Result = Num1 - Num2;
+					break;
+				case 3:
+					Result = Num1 * Num2;
+					break;
+				case 4:
+					Result = Num1 / Num2;
+					break;
+				default:
+					throw new invalid_argument("Invalid Operator: " + to_string(Operator));
+				}
+			}
+			else if (Operator < 7 && Operator >= 5) {
+				cout << "Enter first number: \n";
+				cin >> Num1;
+				switch (Operator) {
+				case 6:
+					Result = sqrt(Num1);
+					break;
+				case 5:
+					Result = pow(Num1, 2);
+					break;
+				default:
+					throw new invalid_argument("Invalid Operator: " + to_string(Operator));
+				}
+			}
+			else if (Operator == 7) {
+				cout << "close calculater.\n";
+				break;
+			}
+			else {
+				throw invalid_argument("Invalid Operator: " + to_string(Operator));
+			}
+			cout << "Result: " << Result << "\n";
+		}
+		catch (exception const& error) {
+			cout << error.what()<< "\n";
+		}
+		catch (...)
+		{
+			std::exception_ptr p = std::current_exception();
+		}
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
